@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch } from "react-redux";
 
 import { deletePost, likePost } from "../../../actions/posts";
@@ -79,21 +79,10 @@ const Post = ({ post, setCurrentId }) => {
             {moment(post.createdAt).fromNow()}
           </Typography>
         </div>
-        {(user?.result?.googleId === post?.creator ||
-          user?.result?._id === post?.creator) && (
-          <div className={classes.overlay2}>
-            <Button
-              style={{ color: "white" }}
-              size="small"
-              onClick={() => setCurrentId(post._id)}
-            >
-              <MoreHorizIcon fontSize="medium" />
-            </Button>
-          </div>
-        )}
+
         <div className={classes.details}>
           <Typography variant="body2" color="textSecondary">
-            {post.tags.map((tag) => `#${tag} `)}
+            {post?.tags?.length > 0 ? post.tags.map((tag) => `#${tag} `) : null}
           </Typography>
         </div>
         <Typography
@@ -121,14 +110,24 @@ const Post = ({ post, setCurrentId }) => {
         </Button>
         {(user?.result?.googleId === post?.creator ||
           user?.result?._id === post?.creator) && (
-          <Button
-            size="small"
-            color="secondary"
-            onClick={() => dispatch(deletePost(post._id))}
-          >
-            <DeleteIcon fontSize="small" />
-            Delete
-          </Button>
+          <>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => setCurrentId(post._id)}
+            >
+              <EditIcon fontSize="small" />
+              Edit
+            </Button>
+            <Button
+              size="small"
+              color="secondary"
+              onClick={() => dispatch(deletePost(post._id))}
+            >
+              <DeleteIcon fontSize="small" />
+              Delete
+            </Button>
+          </>
         )}
       </CardActions>
     </Card>

@@ -1,8 +1,9 @@
 {
   "name": "memories-mern-client",
   "version": "0.1.0",
+  "homepage": "https://memories.jbsselim.com",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "https://memories-jbsse.herokuapp.com",
   "dependencies": {
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.9.1",
